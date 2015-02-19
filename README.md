@@ -1,6 +1,8 @@
 Hidden Hippo
 ============
 
+[![Build Status](https://travis-ci.org/beraboris/hidden-hippo.svg?branch=master)](https://travis-ci.org/beraboris/hidden-hippo)
+
 A tool that identifies the people around by sniffing network traffic and mining social networks.
 
 Installation
