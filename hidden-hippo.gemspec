@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.name          = 'hidden-hippo'
   spec.version       = HiddenHippo::VERSION
   spec.authors       = ['Boris Bera', 'Clément Zotti', 'François Genois', 'Ulrich Kossou']
-  spec.email         = ['bboris@rsoft.ca']
+  spec.email         = ['bboris@rsoft.ca', nil, nil, nil]
   spec.summary       = %q{A tool that identifies the people around by sniffing network traffic and mining social networks.}
   spec.homepage      = 'https://github.com/beraboris/hidden-hippo'
   spec.license       = 'MIT'
