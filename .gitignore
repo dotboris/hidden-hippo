@@ -36,3 +36,8 @@ Gemfile.lock
 # unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
 .rvmrc
 
+# Created by https://www.gitignore.io
+
+### Vagrant ###
+.vagrant/
+
