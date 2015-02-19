@@ -1,4 +1,4 @@
-<img align="right" href="hippo.png"/>
+<img align="right" src="hippo.png"/>
 
 Hidden Hippo
 ============
