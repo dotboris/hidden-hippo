@@ -1,3 +1,5 @@
+<img align="right" href="hippo.png"/>
+
 Hidden Hippo
 ============
 
