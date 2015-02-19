@@ -1,7 +1,7 @@
+<img align="right" src="hippo-small.png"/>
+
 Hidden Hippo
 ============
-
-<img align="right" src="hippo-small.png"/>
 
 [![Build Status](https://travis-ci.org/beraboris/hidden-hippo.svg?branch=master)](https://travis-ci.org/beraboris/hidden-hippo)
 
