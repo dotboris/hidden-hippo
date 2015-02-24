@@ -1,3 +1,4 @@
 #!/usr/bin/env ruby
 require 'hidden_hippo'
 
+HiddenHippo::Runner.start
