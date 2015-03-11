@@ -49,6 +49,26 @@ module HiddenHippo
         end
       end
 
+      desc 'status', 'check if the database is running'
+      def status
+        pid_file = home + 'pid/db.pid'
+
+        if pid_file.exist?
+          pid = pid_file.read.to_i
+          if HiddenHippo.pid_exists? pid
+            say "Database is running with pid #{pid}"
+            exit 0
+          else
+            say 'Database is not running, but the pid file is present'
+            say "You may need to delete #{pid_file}"
+            exit 2
+          end
+        else
+          say 'Database is not running'
+          exit 1
+        end
+      end
+
       private
 
       def home

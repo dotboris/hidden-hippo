@@ -76,8 +76,28 @@ describe 'hh db' do
   end
 
   describe 'status' do
-    it 'should return 0 if running'
-    it 'should return 1 if not running'
-    it 'should return 2 if not running but pid file is present'
+    it 'should return 0 if running' do
+      HiddenHippo::Cli::App.start %w{db start}
+
+      expect{HiddenHippo::Cli::App.start %w{db status}}.to raise_error SystemExit do |error|
+        expect(error.status).to eq 0
+      end
+    end
+
+    it 'should return 1 if not running' do
+      expect{HiddenHippo::Cli::App.start %w{db status}}.to raise_error SystemExit do |error|
+        expect(error.status).to eq 1
+      end
+    end
+
+    it 'should return 2 if not running but pid file is present' do
+      pid_file = (home + 'pid/db.pid')
+      pid_file.dirname.mkpath
+      File.write pid_file, '99999'
+
+      expect{HiddenHippo::Cli::App.start %w{db status}}.to raise_error SystemExit do |error|
+        expect(error.status).to eq 2
+      end
+    end
   end
 end
