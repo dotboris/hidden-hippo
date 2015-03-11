@@ -44,7 +44,7 @@ describe 'hh db' do
     it 'should complain if the pid exists' do
       pid_file = (home + 'pid/db.pid')
       pid_file.dirname.mkpath
-      pid_file.write '12345'
+      File.write pid_file, '12345'
 
       expect{HiddenHippo::Cli::App.start %w{db start}}.to raise_error SystemExit do |error|
         expect(error.status).not_to eq 0

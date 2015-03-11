@@ -30,7 +30,7 @@ module HiddenHippo
                             '--logpath', log_path.to_s
 
         pid_file.dirname.mkpath
-        pid_file.write pid
+        File.write pid_file, pid
       end
 
       private
