@@ -10,7 +10,7 @@ describe 'hh db' do
 
   describe 'start' do
     it 'should create a pid file' do
-      HiddenHippo::Runner.start %w{db start}
+      HiddenHippo::Cli.start %w{db start}
 
       expect(home + 'pid/db.pid').to exist
     end

@@ -22,5 +22,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rspec', '~> 3.2'
 
   spec.add_dependency 'packetfu', '~> 1.1'
-  spec.add_dependency 'boson', '~> 1.3'
+  spec.add_dependency 'thor', '~> 0.19'
 end
