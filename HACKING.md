@@ -57,6 +57,10 @@ Install dependencies
 
     $ bundle install
 
+Install mongodb. This is very platform specific. Look it up in the appropriate wiki. Currently we're only supporting
+version 2.4. It could work with 2.6 but it's not tested. Note that you don't need to have mongodb running, hidden-hippo
+will start it for you.
+
 Running hidden-hippo
 --------------------
 
