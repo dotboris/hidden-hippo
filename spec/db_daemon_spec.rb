@@ -11,7 +11,9 @@ describe 'hh db' do
   after do
     if (home + 'pid/db.pid').exist?
       begin
-        Process.kill 9, (home + 'pid/db.pid').read.to_i
+        pid = (home + 'pid/db.pid').read.to_i
+        Process.detach pid # keep the zombies at bay
+        Process.kill 9, pid
       rescue
         # do nothing
       end
@@ -56,8 +58,11 @@ describe 'hh db' do
     it 'should kill the db' do
       HiddenHippo::Cli::App.start %w{db start}
       pid = (home + 'pid/db.pid').read.to_i
+      Process.detach pid # force reap the pid so that our pid_exists? test works
 
       HiddenHippo::Cli::App.start %w{db stop}
+      sleep 0.1
+
       expect(HiddenHippo.pid_exists? pid).to be_falsey
     end
 

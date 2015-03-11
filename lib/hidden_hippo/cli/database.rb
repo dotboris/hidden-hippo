@@ -40,7 +40,6 @@ module HiddenHippo
         if pid_file.exist?
           pid = pid_file.read.to_i
           Process.kill 15, pid
-          Process.wait pid
 
           pid_file.delete
         else
