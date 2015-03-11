@@ -33,6 +33,22 @@ module HiddenHippo
         File.write pid_file, pid
       end
 
+      desc 'stop', 'stop the database service'
+      def stop
+        pid_file = (home + 'pid/db.pid')
+
+        if pid_file.exist?
+          pid = pid_file.read.to_i
+          Process.kill 15, pid
+          Process.wait pid
+
+          pid_file.delete
+        else
+          say 'Database is not running'
+          exit 1
+        end
+      end
+
       private
 
       def home

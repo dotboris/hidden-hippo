@@ -53,8 +53,26 @@ describe 'hh db' do
   end
 
   describe 'stop' do
-    it 'should kill the db'
-    it 'should complain if the pid file is missing'
+    it 'should kill the db' do
+      HiddenHippo::Cli::App.start %w{db start}
+      pid = (home + 'pid/db.pid').read.to_i
+
+      HiddenHippo::Cli::App.start %w{db stop}
+      expect(HiddenHippo.pid_exists? pid).to be_falsey
+    end
+
+    it 'should remove the pid file' do
+      HiddenHippo::Cli::App.start %w{db start}
+      HiddenHippo::Cli::App.start %w{db stop}
+
+      expect(home + 'pid/db.pid').not_to exist
+    end
+
+    it 'should complain if the pid file is missing' do
+      expect{HiddenHippo::Cli::App.start %w{db stop}}.to raise_error SystemExit do |error|
+        expect(error.status).not_to eq 0
+      end
+    end
   end
 
   describe 'status' do

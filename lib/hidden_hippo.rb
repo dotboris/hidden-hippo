@@ -4,9 +4,9 @@ require 'hidden_hippo/cli/app'
 module HiddenHippo
   def pid_exists?(pid)
     Process.kill 0, pid
-    true
+    return true
   rescue
-    false
+    return false
   end
   module_function :pid_exists?
 end
