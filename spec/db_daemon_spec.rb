@@ -9,7 +9,14 @@ describe 'hh db' do
   end
 
   after do
-    Process.kill 9, (home + 'pid/db.pid').read.to_i if (home + 'pid/db.pid').exist?
+    if (home + 'pid/db.pid').exist?
+      begin
+        Process.kill 9, (home + 'pid/db.pid').read.to_i
+      rescue
+        # do nothing
+      end
+    end
+
     home.rmtree
   end
 
@@ -34,7 +41,15 @@ describe 'hh db' do
       expect(home + 'log/db.log').to exist
     end
 
-    it 'should complain if the pid exists'
+    it 'should complain if the pid exists' do
+      pid_file = (home + 'pid/db.pid')
+      pid_file.dirname.mkpath
+      pid_file.write '12345'
+
+      expect{HiddenHippo::Cli::App.start %w{db start}}.to raise_error SystemExit do |error|
+        expect(error.status).not_to eq 0
+      end
+    end
   end
 
   describe 'stop' do

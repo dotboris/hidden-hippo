@@ -8,11 +8,20 @@ module HiddenHippo
 
       desc 'start', 'start the database service'
       def start
+        pid_file = (home + 'pid/db.pid')
+
+        if pid_file.exist?
+          say 'Database is already running'
+          say "If this is not the case, delete the #{pid_file} file"
+          exit 1
+        end
+
         db_path = (home + 'store/db')
         db_path.mkpath
 
         log_path = (home + 'log/db.log')
         log_path.dirname.mkpath
+
 
         pid = Process.spawn 'mongod',
                             '--dbpath', db_path.to_s,
@@ -20,7 +29,6 @@ module HiddenHippo
                             '--smallfiles',
                             '--logpath', log_path.to_s
 
-        pid_file = (home + 'pid/db.pid')
         pid_file.dirname.mkpath
         pid_file.write pid
       end
