@@ -8,6 +8,11 @@ describe 'hh db' do
     ENV['HIDDEN_HIPPO_HOME'] = home.to_s
   end
 
+  after do
+    Process.kill 9, (home + 'pid/db.pid').read.to_i if (home + 'pid/db.pid').exist?
+    home.rmtree
+  end
+
   describe 'start' do
     it 'should create a pid file' do
       HiddenHippo::Cli::App.start %w{db start}
