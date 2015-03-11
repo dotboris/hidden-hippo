@@ -1,5 +1,5 @@
 require 'hidden_hippo/version'
-require 'hidden_hippo/cli'
+require 'hidden_hippo/cli/app'
 
 module HiddenHippo
 end

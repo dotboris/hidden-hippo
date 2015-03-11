@@ -1,4 +1,4 @@
 #!/usr/bin/env ruby
 require 'hidden_hippo'
 
-HiddenHippo::Cli.start
+HiddenHippo::Cli::App.start
