@@ -20,7 +20,13 @@ describe 'hh db' do
       expect(home + 'pid/db.pid').to exist
     end
 
-    it 'should start the mongodb server'
+    it 'should start the mongodb server' do
+      HiddenHippo::Cli::App.start %w{db start}
+
+      pid = (home + 'pid/db.pid').read.to_i
+      expect(HiddenHippo.pid_exists? pid).to be_truthy
+    end
+
     it 'should log to a file'
     it 'should complain if the pid exists'
   end
