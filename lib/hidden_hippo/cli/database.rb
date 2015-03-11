@@ -11,7 +11,14 @@ module HiddenHippo
         db_path = (home + 'store/db')
         db_path.mkpath
 
-        pid = Process.spawn 'mongod', '--dbpath', db_path.to_s, '--port', '28018', '--smallfiles'
+        log_path = (home + 'log/db.log')
+        log_path.dirname.mkpath
+
+        pid = Process.spawn 'mongod',
+                            '--dbpath', db_path.to_s,
+                            '--port', '28018',
+                            '--smallfiles',
+                            '--logpath', log_path.to_s
 
         pid_file = (home + 'pid/db.pid')
         pid_file.dirname.mkpath
@@ -21,7 +28,11 @@ module HiddenHippo
       private
 
       def home
-        @home ||= Pathname.new(ENV['HIDDEN_HIPPO_HOME'] || '~/.hidden-hippo')
+        @home ||= if ENV['HIDDEN_HIPPO_HOME']
+                    Pathname.new(ENV['HIDDEN_HIPPO_HOME'])
+                  else
+                    Pathname.new(ENV['HOME']) + '.hidden-hippo'
+                  end
         @home.mkpath
         @home
       end

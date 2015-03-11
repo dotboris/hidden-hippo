@@ -27,7 +27,13 @@ describe 'hh db' do
       expect(HiddenHippo.pid_exists? pid).to be_truthy
     end
 
-    it 'should log to a file'
+    it 'should log to a file' do
+      HiddenHippo::Cli::App.start %w{db start}
+      sleep 0.1 # give mongod a chance to actually create the file
+
+      expect(home + 'log/db.log').to exist
+    end
+
     it 'should complain if the pid exists'
   end
 
