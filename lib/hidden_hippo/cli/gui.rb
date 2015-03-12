@@ -33,6 +33,18 @@ module HiddenHippo
         File.write pid_file, pid
       end
 
+      desc 'stop', 'stop the gui service'
+      def stop
+        if pid_file.exist?
+          pid = pid_file.read.to_i
+          Process.kill 15, pid
+          pid_file.delete
+        else
+          say 'Gui service is not running'
+          exit 1
+        end
+      end
+
       private
 
       def pid_file

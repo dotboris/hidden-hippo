@@ -55,9 +55,29 @@ describe 'hh gui' do
   end
 
   describe 'stop' do
-    it 'should kill the process'
-    it 'should delete the pid file'
-    it 'should complain if the pid file is missing'
+    it 'should kill the process' do
+      HiddenHippo::Cli::App.start %w{gui start}
+      pid = pid_file.read.to_i
+      Process.detach pid # make sure we don't get a zombie
+
+      HiddenHippo::Cli::App.start %w{gui stop}
+      sleep 0.1
+
+      expect(HiddenHippo.pid_exists? pid).to be_falsey
+    end
+
+    it 'should delete the pid file' do
+      HiddenHippo::Cli::App.start %w{gui start}
+      HiddenHippo::Cli::App.start %w{gui stop}
+
+      expect(pid_file).not_to exist
+    end
+
+    it 'should complain if the pid file is missing' do
+      expect{HiddenHippo::Cli::App.start %w{gui stop}}.to raise_error SystemExit do |error|
+        expect(error.status).not_to eq 0
+      end
+    end
   end
 
   describe 'status' do
