@@ -1,9 +1,12 @@
 require 'thor'
 require 'pathname'
+require 'hidden_hippo/paths'
 
 module HiddenHippo
   module Cli
     class Database < Thor
+      include HiddenHippo::Paths
+
       namespace :db
 
       desc 'start', 'start the database service'
@@ -66,18 +69,6 @@ module HiddenHippo
           say 'Database is not running'
           exit 1
         end
-      end
-
-      private
-
-      def home
-        @home ||= if ENV['HIDDEN_HIPPO_HOME']
-                    Pathname.new(ENV['HIDDEN_HIPPO_HOME'])
-                  else
-                    Pathname.new(ENV['HOME']) + '.hidden-hippo'
-                  end
-        @home.mkpath
-        @home
       end
     end
   end
