@@ -1,74 +1,44 @@
 require 'thor'
-require 'pathname'
-require 'hidden_hippo/paths'
+require 'hidden_hippo/daemon'
 
 module HiddenHippo
   module Cli
     class Database < Thor
-      include HiddenHippo::Paths
+      class Daemon < HiddenHippo::Daemon
+        def initialize
+          super('db')
+        end
+
+        protected
+
+        def run
+          Process.spawn 'mongod',
+                        '--dbpath', db_path.to_s,
+                        '--port', '28018',
+                        '--smallfiles',
+                        '--logpath', log_file.to_s
+        end
+
+        def db_path
+          home + 'store/db'
+        end
+      end
 
       namespace :db
 
       desc 'start', 'start the database service'
       def start
-        pid_file = (home + 'pid/db.pid')
-
-        if pid_file.exist?
-          say 'Database is already running'
-          say "If this is not the case, delete the #{pid_file} file"
-          exit 1
-        end
-
-        db_path = (home + 'store/db')
-        db_path.mkpath
-
-        log_path = (home + 'log/db.log')
-        log_path.dirname.mkpath
-
-
-        pid = Process.spawn 'mongod',
-                            '--dbpath', db_path.to_s,
-                            '--port', '28018',
-                            '--smallfiles',
-                            '--logpath', log_path.to_s
-
-        pid_file.dirname.mkpath
-        File.write pid_file, pid
+        Daemon.new.start
       end
 
       desc 'stop', 'stop the database service'
       def stop
-        pid_file = (home + 'pid/db.pid')
-
-        if pid_file.exist?
-          pid = pid_file.read.to_i
-          Process.kill 15, pid
-
-          pid_file.delete
-        else
-          say 'Database is not running'
-          exit 1
-        end
+        Daemon.new.stop
       end
 
       desc 'status', 'check if the database is running'
       def status
-        pid_file = home + 'pid/db.pid'
-
-        if pid_file.exist?
-          pid = pid_file.read.to_i
-          if HiddenHippo.pid_exists? pid
-            say "Database is running with pid #{pid}"
-            exit 0
-          else
-            say 'Database is not running, but the pid file is present'
-            say "You may need to delete #{pid_file}"
-            exit 2
-          end
-        else
-          say 'Database is not running'
-          exit 1
-        end
+        Daemon.new.status
       end
     end
   end
