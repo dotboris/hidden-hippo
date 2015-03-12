@@ -31,6 +31,8 @@ module HiddenHippo
 
         pid_file.dirname.mkpath
         File.write pid_file, pid
+
+        say 'Started Gui service on http://localhost:5432/'
       end
 
       desc 'stop', 'stop the gui service'
