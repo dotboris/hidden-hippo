@@ -38,7 +38,7 @@ describe 'hh db' do
 
     it 'should log to a file' do
       HiddenHippo::Cli::App.start %w{db start}
-      sleep 0.3 # give mongod a chance to actually create the file
+      sleep 0.5 # give mongod a chance to actually create the file
 
       expect(home + 'log/db.log').to exist
     end
