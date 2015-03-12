@@ -47,7 +47,6 @@ Install ruby. We currently support:
 - ruby 2.0.0
 - ruby 2.1.5
 - ruby 2.2.0
-- jruby in 1.9 mode
 
 Install bundler:
 
