@@ -13,7 +13,7 @@ Check out the source
 Setup a dev environment
 -----------------------
 
-You have to options when it comes to the dev environment. You can use Vagrant,
+You have two options when it comes to the dev environment. You can use Vagrant,
 which is a magic VM thingy that sets up the whole environment for you. Or you
 can setup the environment yourself. Using Vagrant is the easier option.
 
