@@ -45,6 +45,24 @@ module HiddenHippo
         end
       end
 
+      desc 'status', 'check if the gui service is running'
+      def status
+        if pid_file.exist?
+          pid = pid_file.read.to_i
+          if HiddenHippo.pid_exists? pid
+            say "Gui is running with pid #{pid}"
+            exit 0
+          else
+            say 'Gui is not running, but the pid file is present'
+            say "You may need to delete #{pid_file}"
+            exit 2
+          end
+        else
+          say 'Gui is not running'
+          exit 1
+        end
+      end
+
       private
 
       def pid_file
