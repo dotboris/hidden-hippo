@@ -23,4 +23,5 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'packetfu', '~> 1.1'
   spec.add_dependency 'thor', '~> 0.19'
+  spec.add_dependency 'sinatra', '~> 1.4'
 end
