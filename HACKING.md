@@ -20,7 +20,7 @@ can setup the environment yourself. Using Vagrant is the easier option.
 ### Vagrant
 
 If you don't already have it, install [vagrant](https://www.vagrantup.com/downloads.html).
-You'll also going to need either VMware or VirtualBox.
+You're also going to need either VMware or VirtualBox.
 
 Setup the VM with: (This will create a VM with a working dev environment.)
 
