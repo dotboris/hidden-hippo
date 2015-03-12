@@ -9,20 +9,25 @@ module HiddenHippo
     end
 
     def start
-      if pid_file.exist?
+      if running?
         puts "#{@name} is already running"
         puts "If this is not the case, delete #{pid_file}"
         exit 1
+      else
+        if stale_pid_file?
+          puts 'Found a stale pid file, removing it'
+          pid_file.delete
+        end
+
+        pid_file.dirname.mkpath
+        log_file.dirname.mkpath
+
+        pid = run
+
+        File.write pid_file, pid
+
+        puts "Started #{@name} service"
       end
-
-      pid_file.dirname.mkpath
-      log_file.dirname.mkpath
-
-      pid = run
-
-      File.write pid_file, pid
-
-      puts "Started #{@name} service"
     end
 
     def stop
@@ -70,6 +75,16 @@ module HiddenHippo
 
     def log_file
       home + 'log' + "#{@name}.log"
+    end
+
+    private
+
+    def running?
+      pid_file.exist? && HiddenHippo.pid_exists?(pid_file.read.to_i)
+    end
+
+    def stale_pid_file?
+      pid_file.exist? && !HiddenHippo.pid_exists?(pid_file.read.to_i)
     end
   end
 end

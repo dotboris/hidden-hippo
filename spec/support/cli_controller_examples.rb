@@ -45,7 +45,7 @@ shared_examples 'cli daemon controller' do
   end
 
   describe 'start' do
-    it 'should start the gui' do
+    it 'should start the daemon' do
       start
       pid = pid_file.read.to_i
 
@@ -65,9 +65,17 @@ shared_examples 'cli daemon controller' do
       expect(log_file).to exist
     end
 
-    it 'should complain if the pid exists' do
+    it 'replace stale pid file' do
       pid_file.dirname.mkpath
       File.write pid_file, '12345'
+
+      start
+
+      expect(pid_file.read.to_i).not_to eq 12345
+    end
+
+    it 'should complain if daemon is already running' do
+      start
 
       expect{start}.to raise_error SystemExit do |error|
         expect(error.status).not_to eq 0
