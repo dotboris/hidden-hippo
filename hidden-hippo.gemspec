@@ -25,4 +25,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'thor', '~> 0.19'
   spec.add_dependency 'sinatra', '~> 1.4'
   spec.add_dependency 'thin', '~> 1.6'
+  spec.add_dependency 'mongoid', '~> 4.0'
 end
