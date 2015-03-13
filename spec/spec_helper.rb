@@ -1,4 +1,10 @@
+require 'mongoid'
+require 'hidden_hippo'
+require 'shoulda-matchers'
+
 RSpec.configure do |config|
+  config.include Shoulda::Matchers::ActiveModel
+
   stdout = $stdout
   stderr = $stderr
 
@@ -10,6 +16,10 @@ RSpec.configure do |config|
   config.after :each, noisy: true do
     $stdout = stdout
     $stderr = stderr
+  end
+
+  config.before :all, db: true do
+    HiddenHippo.configure_db! :test
   end
 
   config.expect_with :rspec do |expectations|
