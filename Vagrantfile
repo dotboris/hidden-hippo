@@ -14,10 +14,6 @@ Vagrant.configure(2) do |config|
                        git \
                        mongodb-server=1:2.4.9-1ubuntu2
     gem install bundler
-
-    # stop mongodb and disable it starting at boot
-    service mongodb stop
-    echo 'manual' >> /etc/init/mongodb.override
   SHELL
 
   config.vm.provision 'shell', privileged: false, inline: <<-SHELL
