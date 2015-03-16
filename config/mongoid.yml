@@ -1,0 +1,13 @@
+production:
+  sessions:
+    default:
+      hosts:
+        - localhost:28018
+      database: hidden-hippo
+
+test:
+  sessions:
+    default:
+      hosts:
+        - localhost:27017
+      database: hidden-hippo-test

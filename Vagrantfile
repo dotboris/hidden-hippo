@@ -4,6 +4,9 @@
 Vagrant.configure(2) do |config|
   config.vm.box = 'ubuntu/trusty64'
 
+  config.vm.network 'forwarded_port', guest: 5432, host: 5432
+  config.vm.network 'forwarded_port', guest: 28018, host: 28018
+
   config.vm.provision 'shell', inline: <<-SHELL
     apt-get update
     apt-get install -y build-essential \
@@ -11,10 +14,6 @@ Vagrant.configure(2) do |config|
                        git \
                        mongodb-server=1:2.4.9-1ubuntu2
     gem install bundler
-
-    # stop mongodb and disable it starting at boot
-    service mongodb stop
-    echo 'manual' >> /etc/init/mongodb.override
   SHELL
   config.vm.network "forwarded_port", guest: 5432, host: 5432
 
