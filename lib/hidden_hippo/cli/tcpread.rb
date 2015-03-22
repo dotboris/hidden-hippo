@@ -1,6 +1,7 @@
 require 'thor'
 require 'hidden_hippo/daemon'
 require 'pcaplet'
+require 'set'
 
 module HiddenHippo
   module Cli
@@ -9,8 +10,19 @@ module HiddenHippo
         def initialize
           super('tcpread')
         end
+        
         protected
         def run
+        end
+        
+        private
+        def extractName
+          @db_name = Set.new
+          File.open("../../../namedb/name_db.txt", "r") do |file|
+            while name = file.gets
+              @db_name.add name
+            end
+          end
         end
       end
       
