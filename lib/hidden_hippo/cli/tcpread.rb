@@ -12,17 +12,13 @@ module HiddenHippo
         
         protected
         def run
-          extractName
+          extract_name
         end
         
         private
-        def extractName
-          @db_name = Set.new
-          File.open("namedb/name_format.txt", "r") do |file|
-            while name = file.gets
-              @db_name.add name
-            end
-          end
+        def extract_name
+          db_path = HiddenHippo.gem_root + 'namedb/name_format.txt'
+          @db_name = Set.new db_path.readlines.map(&:chomp)
         end
       end
       

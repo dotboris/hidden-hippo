@@ -1,23 +1,19 @@
 require 'set'
+require 'pathname'
 
-
-db_name = Set.new
-File.open("Prenoms.txt") do |file|
-    file.gets
-    while line = file.gets
-        fline = line.split("|")[0]
-        if fline =~ / \(\d+\)/
-            fline = fline.split("(")[0]
-        end
-        db_name.add(fline)
-    end
+def format(line)
+  fline = line.chomp.split("|")[0]
+  if fline =~ / \(\d+\)/
+    fline = fline.split("(")[0]
+  end
+  fline
 end
 
 
-File.open("name_format.txt", "w") do | f |
-    db_name.each do | name |
-        f.puts name
-    end
-end
+txt_name = Pathname.new 'Prenoms.txt'
+db_name = txt_name.readlines.map{|line| format(line)}
 
-p db_name
+
+File.open("name_format.txt", "w") do |f|
+    f.puts db_name[1,db_name.size]
+end
