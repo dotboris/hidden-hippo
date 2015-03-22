@@ -1,6 +1,5 @@
 require 'thor'
 require 'hidden_hippo/daemon'
-require 'pcaplet'
 require 'set'
 
 module HiddenHippo
@@ -13,12 +12,13 @@ module HiddenHippo
         
         protected
         def run
+          extractName
         end
         
         private
         def extractName
           @db_name = Set.new
-          File.open("../../../namedb/name_format.txt", "r") do |file|
+          File.open("namedb/name_format.txt", "r") do |file|
             while name = file.gets
               @db_name.add name
             end
