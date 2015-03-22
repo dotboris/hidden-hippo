@@ -2,7 +2,7 @@ require 'set'
 
 
 db_name = Set.new
-File.open("Prenoms_utf8.txt") do |file|
+File.open("Prenoms.txt") do |file|
     file.gets
     while line = file.gets
         fline = line.split("|")[0]
