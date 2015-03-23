@@ -58,7 +58,7 @@ shared_examples 'cli daemon controller' do
       expect(pid_file).to exist
     end
 
-    it 'should log to file' do
+    it 'should log to file', retry: 3 do
       start
       sleep 0.5
 
@@ -84,7 +84,7 @@ shared_examples 'cli daemon controller' do
   end
 
   describe 'stop' do
-    it 'should kill the process' do
+    it 'should kill the process', retry: 3 do
       start
       pid = pid_file.read.to_i
       Process.detach pid # make sure we don't get a zombie

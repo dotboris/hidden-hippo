@@ -1,6 +1,7 @@
 require 'mongoid'
 require 'hidden_hippo'
 require 'shoulda-matchers'
+require 'rspec/retry'
 
 RSpec.configure do |config|
   config.include Shoulda::Matchers::ActiveModel
