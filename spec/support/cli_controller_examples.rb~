@@ -90,7 +90,7 @@ shared_examples 'cli daemon controller' do
       Process.detach pid # make sure we don't get a zombie
 
       stop
-      sleep 0.5
+      sleep 0.1
 
       expect(HiddenHippo.pid_exists? pid).to be_falsey
     end
