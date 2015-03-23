@@ -4,6 +4,20 @@ require 'hidden_hippo/possibilities'
 describe HiddenHippo::Possibilities do
   let(:possibilities) {HiddenHippo::Possibilities.new}
 
+  describe '#initialize' do
+    it 'should set the base counts' do
+      possibilities = HiddenHippo::Possibilities.new 'foo' => 3
+
+      expect(possibilities['foo']).to eq 3
+    end
+
+    it 'should ignore base counts that are not strings' do
+      possibilities = HiddenHippo::Possibilities.new 'foo' => 'potato'
+
+      expect(possibilities['foo']).to eq 0
+    end
+  end
+
   describe '#<<' do
     it 'should add a possible value' do
       possibilities << 'foo'
@@ -18,6 +32,12 @@ describe HiddenHippo::Possibilities do
       possibilities << 'foo'
 
       expect(possibilities['foo']).to eq 2
+    end
+
+    it 'should convert values to string' do
+      possibilities << 42
+
+      expect(possibilities).to contain_exactly '42'
     end
   end
 

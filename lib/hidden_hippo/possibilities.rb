@@ -6,8 +6,34 @@ module HiddenHippo
   class Possibilities
     include Enumerable
 
-    def initialize
-      @counts = Hash.new {0}
+    class << self
+      def demongoize(hash)
+        HiddenHippo::Possibilities.new hash
+      end
+
+      def mongoize(value)
+        case value
+          when Possibilities then value.mongoize
+          else value
+        end
+      end
+
+      def evolve(value)
+        case value
+          when Possibilities then value.mongoize
+          else value
+        end
+      end
+
+      def resizable?
+        true
+      end
+    end
+
+    def initialize(counts={})
+      @counts = counts
+      @counts.keep_if {|_, c| c.kind_of?(Integer)}
+      @counts.default_proc = proc {0}
     end
 
     def [](value)
@@ -15,7 +41,7 @@ module HiddenHippo
     end
 
     def <<(value)
-      @counts[value] += 1
+      @counts[value.to_s] += 1
     end
 
     def each(&block)
@@ -24,6 +50,14 @@ module HiddenHippo
 
     def each_with_support(&block)
       @counts.sort_by{|c| - c.last}.each &block
+    end
+
+    def mongoize
+      @counts
+    end
+
+    def resizable?
+      Possibilities.resizable?
     end
   end
 end
