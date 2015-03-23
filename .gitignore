@@ -41,3 +41,5 @@ Gemfile.lock
 ### Vagrant ###
 .vagrant/
 
+.idea/
+hidden-hippo.iml
