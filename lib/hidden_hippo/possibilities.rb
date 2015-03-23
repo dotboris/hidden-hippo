@@ -1,4 +1,8 @@
 module HiddenHippo
+  # Represents multiple possible values
+  #
+  # Each possible value has a support count. Adding possible values is done with #<<.
+  # Retrieving the support count for a possible value is done with #[].
   class Possibilities
     include Enumerable
 
