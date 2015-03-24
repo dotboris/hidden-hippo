@@ -15,5 +15,14 @@ describe HiddenHippo::DnsScanner do
 
       scanner.call
     end
+
+    it 'should skip non dns lines' do
+      extractor = double('extractor')
+      scanner = HiddenHippo::DnsScanner.new 'spec/fixtures/tcp_noise.pcap', extractor
+
+      expect(extractor).not_to receive(:call)
+
+      scanner.call
+    end
   end
 end

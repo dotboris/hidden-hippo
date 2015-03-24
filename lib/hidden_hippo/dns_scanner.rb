@@ -10,10 +10,11 @@ module HiddenHippo
 
     def call
       # call Tshark
-      Open3.popen3(%w(tshark tshark), '-r', @file, '-Tfields',
+      Open3.popen3(%w(tshark tshark), '-2', '-r', @file, '-Tfields',
                          '-e', 'wlan.sa',
                          '-e', 'wlan.da',
-                         '-e', 'dns.ptr.domain_name') do |stdin, stdout, stderr, _|
+                         '-e', 'dns.ptr.domain_name',
+                         '-R', 'dns') do |stdin, stdout, stderr, _|
         # we don't need those
         stdin.close
         stderr.close
