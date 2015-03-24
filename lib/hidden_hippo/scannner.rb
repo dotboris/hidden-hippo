@@ -12,7 +12,7 @@ module HiddenHippo
     def call
       # call Tshark
       args = [
-          '-2', '-Tfields',
+          '-2', '-Tfields', '-q',
           '-r', @file,
           '-R', @packet_class.filter,
           *@packet_class.tshark_fields.map {|f| ['-e', f]}.flatten
