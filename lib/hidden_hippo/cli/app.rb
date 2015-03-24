@@ -1,6 +1,7 @@
 require 'thor'
 require 'hidden_hippo/cli/database'
 require 'hidden_hippo/cli/gui'
+require 'hidden_hippo/reader'
 
 module HiddenHippo
   module Cli
@@ -13,7 +14,7 @@ module HiddenHippo
 
       desc 'read [FILE]', 'parse a pcap file'
       def read(file)
-        puts 'hello world'
+        Reader.new(file).call
       end
     end
   end
