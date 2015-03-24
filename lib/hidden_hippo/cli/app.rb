@@ -10,7 +10,11 @@ module HiddenHippo
       
       desc 'gui start|stop|status', 'control the gui service'
       subcommand 'gui', Gui
-      
+
+      desc 'read [FILE]', 'parse a pcap file'
+      def read(file)
+        puts 'hello world'
+      end
     end
   end
 end
