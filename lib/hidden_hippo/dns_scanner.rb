@@ -3,6 +3,9 @@ require 'hidden_hippo/packets/dns'
 
 module HiddenHippo
   class DnsScanner
+    FIELDS = %w{wlan.sa wlan.da dns.ptr.domain_name}
+    FILTER = 'dns'
+
     def initialize(file, *extractors)
       @file = file
       @extractors = extractors
@@ -10,11 +13,10 @@ module HiddenHippo
 
     def call
       # call Tshark
-      Open3.popen3(%w(tshark tshark), '-2', '-r', @file, '-Tfields',
-                         '-e', 'wlan.sa',
-                         '-e', 'wlan.da',
-                         '-e', 'dns.ptr.domain_name',
-                         '-R', 'dns') do |stdin, stdout, stderr, _|
+      Open3.popen3(%w(tshark tshark), '-2',
+                   '-r', @file,
+                   '-Tfields', *FIELDS.map {|f| ['-e', f]}.flatten,
+                   '-R', FILTER) do |stdin, stdout, stderr, _|
         # we don't need those
         stdin.close
         stderr.close
