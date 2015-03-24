@@ -60,6 +60,9 @@ Install mongodb. This is very platform specific. Look it up in the appropriate w
 version 2.4. It could work with 2.6 but it's not tested. The unit tests assume that mongo is running on
 `localhost:27017`.
 
+Install tshark. the `tshark` executable needs to be somewhere in your `$PATH`. tshark is part of the wireshark
+distribution. It is sometimes packaged on its own.
+
 Running hidden-hippo
 --------------------
 
