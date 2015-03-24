@@ -26,7 +26,7 @@ module HiddenHippo
         stdout.each do |line|
           split_line = line.chomp.split("\t").map {|f| f.empty? ? nil : f}
           assoc = @packet_class.tshark_fields.zip split_line
-          packet = @packet_class.parse assoc.to_h
+          packet = @packet_class.parse Hash[*assoc.flatten]
 
           @extractors.each do |extractor|
             extractor.call(packet)

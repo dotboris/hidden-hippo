@@ -29,7 +29,7 @@ module HiddenHippo
       def self.parse(hash)
         instance = new
 
-        reverse_names = fields.map {|f| [f.tshark_field, f]}.to_h
+        reverse_names = Hash[*fields.map{|f| [f.tshark_field, f]}.flatten]
 
         hash.each do |k, v|
           field = reverse_names[k]
