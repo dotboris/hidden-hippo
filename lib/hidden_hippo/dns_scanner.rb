@@ -3,7 +3,7 @@ require 'hidden_hippo/packets/dns'
 
 module HiddenHippo
   class DnsScanner
-    FIELDS = %w{wlan.sa wlan.da dns.ptr.domain_name}
+    FIELDS = %w{wlan.sa wlan.da eth.src eth.dst dns.ptr.domain_name}
     FILTER = 'dns'
 
     def initialize(file, *extractors)
@@ -22,7 +22,6 @@ module HiddenHippo
         stderr.close
 
         stdout.each do |line|
-          puts line
           dns = parse line
           @extractors.each do |extractor|
             extractor.call(dns)
@@ -32,7 +31,11 @@ module HiddenHippo
     end
 
     def parse(line)
-      Packets::Dns.new *line.chomp.split("\t")
+      values = line.chomp.split("\t")
+      mac_addresses = values.slice! 0, 4
+      src = mac_addresses[0] || mac_addresses[2]
+      dest = mac_addresses[1] || mac_addresses[3]
+      Packets::Dns.new src, dest, *values
     end
   end
 end

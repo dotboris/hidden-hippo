@@ -24,5 +24,17 @@ describe HiddenHippo::DnsScanner do
 
       scanner.call
     end
+
+    it 'should find the mac addresses in eth traffic' do
+      extractor = double('extractor')
+      scanner = HiddenHippo::DnsScanner.new('spec/fixtures/dns_reddit_eth.pcap', extractor)
+
+      expect(extractor).to receive(:call).at_least(:once) do |packet|
+        expect(packet.mac_src).not_to be_nil
+        expect(packet.mac_dest).not_to be_nil
+      end
+
+      scanner.call
+    end
   end
 end
