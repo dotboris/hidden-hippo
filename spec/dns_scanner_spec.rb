@@ -5,7 +5,7 @@ describe HiddenHippo::DnsScanner do
   describe '#call' do
     it 'should parse the pcap file' do
       extractor = double('extractor')
-      scanner = HiddenHippo::DnsScanner.new('fixtures/dns_elise.pcap', extractor)
+      scanner = HiddenHippo::DnsScanner.new('spec/fixtures/dns_elise.pcap', extractor)
 
       expect(extractor).to receive(:call) do |packet|
         expect(packet.host_name).to eq 'Elises-MacBook-Pro.local'

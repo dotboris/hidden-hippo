@@ -9,8 +9,12 @@ module HiddenHippo
     end
 
     def call
-      #Call tshark and read stream #tshark -r elise.pcap -T fields -e dns.ptr.domain_name
-      Open3.popen3(["tshark", "tshark"], "-r", @file, "-Tfields", "-e", "dns.ptr.domain_name", "-e", "wlan.sa", "-e", "wlan.da") do |stdin, stdout, stderr, _|
+      # call Tshark
+      Open3.popen3(%w(tshark tshark), '-r', @file, '-Tfields',
+                         '-e', 'wlan.sa',
+                         '-e', 'wlan.da',
+                         '-e', 'dns.ptr.domain_name') do |stdin, stdout, stderr, _|
+        # we don't need those
         stdin.close
         stderr.close
 
@@ -22,11 +26,10 @@ module HiddenHippo
           end
         end
       end
-      #Send to all extractors
     end
 
     def parse(line)
-      Packets::Dns.new line.split("\t")
+      Packets::Dns.new *line.chomp.split("\t")
     end
   end
 end
