@@ -12,10 +12,10 @@ Vagrant.configure(2) do |config|
     apt-get install -y build-essential \
                        ruby1.9.1-dev \
                        git \
-                       mongodb-server=1:2.4.9-1ubuntu2
+                       mongodb-server=1:2.4.9-1ubuntu2 \
+                       tshark=1.10.6-1
     gem install bundler
   SHELL
-  config.vm.network "forwarded_port", guest: 5432, host: 5432
 
   config.vm.provision 'shell', privileged: false, inline: <<-SHELL
     cd /vagrant
