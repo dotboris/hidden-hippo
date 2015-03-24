@@ -1,10 +1,11 @@
-require 'hidden_hippo/dns_scanner'
+require 'hidden_hippo/scannner'
+require 'hidden_hippo/packets/dns'
 
 module HiddenHippo
   class Reader
     def initialize(file)
       @file = file
-      @dns_scanner = DnsScanner.new(file, nil)
+      @dns_scanner = Scannner.new(file, Packets::Dns)
     end
 
     def call
