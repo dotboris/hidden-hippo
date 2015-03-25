@@ -49,6 +49,11 @@ module HiddenHippo
       field :wlan_mac_src, tshark: 'wlan.sa'
       field :wlan_mac_dest, tshark: 'wlan.da'
 
+      field :udp_src_port, tshark: 'udp.srcport', conv: :to_i
+      field :tcp_src_port, tshark: 'tcp.srcport', conv: :to_i
+      field :udp_dest_port, tshark: 'udp.dstport', conv: :to_i
+      field :tcp_dest_port, tshark: 'tcp.dstport', conv: :to_i
+
       def mac_src
         eth_mac_src || wlan_mac_src
       end
