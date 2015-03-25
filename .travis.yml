@@ -1,5 +1,5 @@
 before_install:
-  - sudo add-apt-repository ppa:wireshark/ppa
+  - sudo add-apt-repository -s ppa:ubuntu/wireshark
   - sudp apt-get update -q
   - sudo apt-get insatll tshark=1.12.1+g01b65bf-2~ubuntu14.10.2
 
