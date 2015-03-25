@@ -1,7 +1,7 @@
 before_install:
   - sudo add-apt-repository ppa:n-muench/programs-ppa -y
   - sudo apt-get update -q
-  - sudo apt-get install -y wireshark=1.12.1
+  - sudo apt-get install -y wireshark
 
 services: mongodb
 language: ruby
