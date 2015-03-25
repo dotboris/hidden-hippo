@@ -19,7 +19,7 @@ describe HiddenHippo::Extractors::MdnsHostnameExtractor do
       out = queue.pop true
       expect(out).not_to be_nil
       expect(out.mac_address).to eq 'some mac'
-      expect(out.fields).to eq({host_name: 'the host name'})
+      expect(out.fields).to eq({hostname: 'the host name'})
     end
 
     it 'should ignore packets not on port 5353' do

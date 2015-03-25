@@ -11,7 +11,7 @@ module HiddenHippo
         return unless packet.udp_dest_port == 5353
         return unless packet.response?
 
-        @queue << Update.new(packet.mac_src, {host_name: packet.ptr})
+        @queue << Update.new(packet.mac_src, {hostname: packet.ptr})
       end
     end
   end
