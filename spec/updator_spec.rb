@@ -24,4 +24,14 @@ describe HiddenHippo::Updator, :db do
     dossier = HiddenHippo::Dossier.find 'find me'
     expect(dossier.name['John Doe']).to eq 1
   end
+
+  it 'should create the dossier if it is missing' do
+    queue << HiddenHippo::Update.new('not there', {hostname: 'Bobby-PC'})
+
+    updator.start
+    sleep 0.5
+
+    dossier = HiddenHippo::Dossier.find 'not there'
+    expect(dossier.hostname['Bobby-PC']).to eq 1
+  end
 end

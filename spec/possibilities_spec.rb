@@ -39,6 +39,13 @@ describe HiddenHippo::Possibilities do
 
       expect(possibilities).to contain_exactly '42'
     end
+
+    it 'should replace dots with underscores' do
+      possibilities << 'dat.thing'
+
+      expect(possibilities['dat.thing']).to eq 0
+      expect(possibilities['dat_thing']).to eq 1
+    end
   end
 
   describe '#[]' do

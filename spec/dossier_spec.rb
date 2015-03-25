@@ -60,4 +60,13 @@ describe HiddenHippo::Dossier, :db do
     found = HiddenHippo::Dossier.find '11:00:11:00:11:00:11'
     expect(found.name['Whoopie']).to eq 1
   end
+
+  it 'should update possibilities' do
+    HiddenHippo::Dossier.create mac_address: 'find me'
+    dossier = HiddenHippo::Dossier.find 'find me'
+    dossier.name << 'thing'
+    dossier.save
+
+    expect(HiddenHippo::Dossier.find('find me').name['thing']).to eq 1
+  end
 end
