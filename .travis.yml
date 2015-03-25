@@ -1,7 +1,7 @@
 before_install:
-  - sudo add-apt-repository ppa:n-muench/programs-ppa
+  - sudo add-apt-repository ppa:n-muench/programs-ppa -y
   - sudp apt-get update -q
-  - sudo apt-get insatll tshark=1.12.1+g01b65bf-1~ppa2
+  - sudo apt-get insatll -y tshark=1.12.1+g01b65bf-1~ppa2
 
 services: mongodb
 language: ruby
