@@ -1,7 +1,5 @@
 before_install:
-  - sudo add-apt-repository ppa:n-muench/programs-ppa -y
-  - sudo apt-get update -q
-  - sudo apt-get install -y wireshark
+  - ./ci/install-tshark.sh
 
 services: mongodb
 language: ruby
