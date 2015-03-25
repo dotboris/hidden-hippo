@@ -1,4 +1,6 @@
 before_install:
+  - sudo apt-get update -q
+  - sudo apt-get install -y libpcap-dev
   - ./ci/install-tshark.sh
 
 services: mongodb
