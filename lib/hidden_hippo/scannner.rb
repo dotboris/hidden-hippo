@@ -11,11 +11,13 @@ module HiddenHippo
 
     def call
       # call Tshark
+      tshark_fields = @packet_class.tshark_fields
+
       args = [
           '-2', '-Tfields', '-q',
           '-r', @file,
           '-R', @packet_class.filter,
-          *@packet_class.tshark_fields.map {|f| ['-e', f]}.flatten
+          *tshark_fields.map {|f| ['-e', f]}.flatten
       ]
 
       Open3.popen3(%w(tshark tshark), '-2', *args) do |stdin, stdout, stderr, waiter|
@@ -23,8 +25,15 @@ module HiddenHippo
         stdin.close
 
         stdout.each do |line|
+          if line.count("\t") != tshark_fields.size - 1
+            puts 'Warinig: tshark returned a line of the wrong size. Ignoring it.'
+            puts "Offending line: #{line}"
+            next
+          end
+
           split_line = line.chomp.split("\t").map {|f| f.empty? ? nil : f}
-          assoc = @packet_class.tshark_fields.zip split_line
+
+          assoc = tshark_fields.zip split_line
           packet = @packet_class.parse Hash[*assoc.flatten]
 
           @extractors.each do |extractor|
