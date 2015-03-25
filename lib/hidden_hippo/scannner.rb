@@ -14,7 +14,7 @@ module HiddenHippo
       tshark_fields = @packet_class.tshark_fields
 
       args = [
-          '-Tfields', '-q',
+          '-2', '-Tfields', '-q',
           '-r', @file,
           '-R', @packet_class.filter,
           *tshark_fields.map {|f| ['-e', f]}.flatten
