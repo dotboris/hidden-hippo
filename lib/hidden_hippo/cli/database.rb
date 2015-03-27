@@ -12,6 +12,8 @@ module HiddenHippo
         protected
 
         def run
+          db_path.mkpath
+
           Process.spawn 'mongod',
                         '--dbpath', db_path.to_s,
                         '--port', '28018',

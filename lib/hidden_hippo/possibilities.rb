@@ -7,8 +7,8 @@ module HiddenHippo
     include Enumerable
 
     class << self
-      def demongoize(hash)
-        HiddenHippo::Possibilities.new hash
+      def demongoize(doc)
+        HiddenHippo::Possibilities.new doc
       end
 
       def mongoize(value)
@@ -41,7 +41,7 @@ module HiddenHippo
     end
 
     def <<(value)
-      @counts[value.to_s] += 1
+      @counts[value.to_s.gsub('.', '_')] += 1
     end
 
     def each(&block)

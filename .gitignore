@@ -1,5 +1,7 @@
 # Created by https://www.gitignore.io
 
+*~
+
 ### Ruby ###
 *.gem
 *.rbc
@@ -41,3 +43,5 @@ Gemfile.lock
 ### Vagrant ###
 .vagrant/
 
+.idea/
+hidden-hippo.iml
