@@ -1,5 +1,6 @@
 require 'thor'
 require 'thin'
+require 'hidden_hippo'
 require 'hidden_hippo/daemon'
 require 'hidden_hippo/gui'
 
@@ -15,6 +16,8 @@ module HiddenHippo
 
         def run
           pid = fork do
+            HiddenHippo.configure_db!
+
             server = Thin::Server.new '0.0.0.0', 5432, HiddenHippo::Gui
             server.log_file = log_file.to_s
             server.reopen_log
