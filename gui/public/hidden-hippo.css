@@ -3,6 +3,16 @@
     height: 150px;
 }
 
-.dossier-short .caption {
+.dossier-short .caption h3 {
     text-align: center;
+}
+
+.dossier-short .name {
+    font-weight: bold;
+}
+
+.dossier-short .value {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }

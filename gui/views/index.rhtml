@@ -4,13 +4,19 @@
 <% dossiers.each do |dossier| %>
 <div class="col-md-4">
 <div class="thumbnail dossier-short">
-    <img src="hippo.png" class="img-circle person-picture">
+    <img src="user-placeholder.png" class="img-circle person-picture">
     <div class="caption">
         <a href="/<%= dossier.mac_address %>">
             <h3><%= dossier.mac_address %></h3>
         </a>
-        <p><%= dossier.name.first %></p>
-        <p><%= dossier.hostname.first %></p>
+        <div class="row">
+            <div class="col-xs-4 name">Name:</div>
+            <div class="col-xs-8 value"><%= dossier.name.first || 'Nothing :(' %></div>
+        </div>
+        <div class="row">
+            <div class="col-xs-4 name">Host Name:</div>
+            <div class="col-xs-8 value"><%= dossier.hostname.first || 'Nothing :(' %></div>
+        </div>
     </div>
 </div>
 </div>
