@@ -1,0 +1,19 @@
+<div class="container">
+<h1 class="page-header">Hidden Hippo</h1>
+<div class="row">
+<% dossiers.each do |dossier| %>
+<div class="col-md-4">
+<div class="thumbnail dossier-short">
+    <img src="hippo.png" class="img-circle person-picture">
+    <div class="caption">
+        <a href="/<%= dossier.mac_address %>">
+            <h3><%= dossier.mac_address %></h3>
+        </a>
+        <p><%= dossier.name.first %></p>
+        <p><%= dossier.hostname.first %></p>
+    </div>
+</div>
+</div>
+<% end %>
+</div>
+</div>
