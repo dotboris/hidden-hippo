@@ -1,8 +1,14 @@
-require 'hidden_hippo/scannner'
-require 'hidden_hippo/packets/dns'
-require 'hidden_hippo/extractors/mdns_hostname_extractor'
-require 'hidden_hippo/extractors/dns_llmnr_extractor'
+require 'hidden_hippo/scanner'
 require 'hidden_hippo/updator'
+
+require 'hidden_hippo/packets/dns'
+require 'hidden_hippo/packets/dhcp'
+require 'hidden_hippo/packets/http'
+
+require 'hidden_hippo/extractors/mdns_hostname_extractor'
+require 'hidden_hippo/extractors/dhcp_hostname_extractor'
+require 'hidden_hippo/extractors/http_request_url_extractor'
+require 'hidden_hippo/extractors/dns_llmnr_extractor'
 require 'thread'
 
 module HiddenHippo
@@ -11,18 +17,19 @@ module HiddenHippo
       @file = file
       updator_queue = Queue.new
       @updator = Updator.new updator_queue
-
-      dns_extractors = [
-          Extractors::MdnsHostnameExtractor.new(updator_queue),
-          Extractors::DnsLlmnrExtractor.new(updator_queue)
-      ]
-
-      @dns_scanner = Scannner.new(file, Packets::Dns, *dns_extractors)
+      @scanners = []
+      @scanners << Scanner.new(file, Packets::Dns,
+                               Extractors::MdnsHostnameExtractor.new(updator_queue),
+                               Extractors::DnsLlmnrExtractor.new(updator_queue))
+      @scanners << Scanner.new(file, Packets::Dhcp,
+                               Extractors::DhcpHostnameExtractor.new(updator_queue))
+      @scanners << Scanner.new(file, Packets::Http,
+                               Extractors::HttpRequestUrlExtractor.new(updator_queue))
     end
 
     def call
       @updator.start
-      @dns_scanner.call
+      @scanners.each &:call
       @updator.stop
     end
   end
