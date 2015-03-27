@@ -1,5 +1,4 @@
 require 'thread'
-require 'hidden_hippo/packets/dhcp'
 require 'hidden_hippo/extractors/dhcp_hostname_extractor'
 
 describe HiddenHippo::Extractors::DhcpHostnameExtractor do

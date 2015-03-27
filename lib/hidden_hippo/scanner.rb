@@ -1,5 +1,4 @@
 require 'open3'
-require 'hidden_hippo/packets/dns'
 
 module HiddenHippo
   class Scanner
