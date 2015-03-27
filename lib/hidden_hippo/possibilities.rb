@@ -41,7 +41,7 @@ module HiddenHippo
     end
 
     def <<(value)
-      @counts[value.to_s.gsub('.', '_')] += 1
+      @counts[value.to_s.gsub(/[.$]/, '_')] += 1
     end
 
     def each(&block)
