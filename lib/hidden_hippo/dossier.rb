@@ -18,5 +18,6 @@ module HiddenHippo
     field :device, type: Possibilities, default: ->{ Possibilities.new }
     field :gender, type: Possibilities, default: ->{ Possibilities.new }
     field :age, type: Possibilities, default: ->{ Possibilities.new }
+    field :history, type: Possibilities, default: ->{ Possibilities.new }
   end
 end
