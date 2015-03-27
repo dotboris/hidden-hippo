@@ -1,0 +1,11 @@
+<div class="container">
+    <h1 class="page-header"><%= dossier.mac_address %></h1>
+
+    <%= erb :possibilities, locals: {name: 'Name', possibilities: dossier.name} %>
+    <%= erb :possibilities, locals: {name: 'Host name', possibilities: dossier.hostname} %>
+    <%= erb :possibilities, locals: {name: 'User name', possibilities: dossier.username} %>
+    <%= erb :possibilities, locals: {name: 'Email', possibilities: dossier.email} %>
+    <%= erb :possibilities, locals: {name: 'Device', possibilities: dossier.device} %>
+    <%= erb :possibilities, locals: {name: 'Gender', possibilities: dossier.gender} %>
+    <%= erb :possibilities, locals: {name: 'Age', possibilities: dossier.age} %>
+</div>

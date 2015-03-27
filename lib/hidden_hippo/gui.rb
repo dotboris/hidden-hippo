@@ -11,5 +11,11 @@ module HiddenHippo
 
       erb :index, locals: {dossiers: dossiers}
     end
+
+    get '/:mac' do
+      dossier = Dossier.find params[:mac]
+
+      erb :dossier, locals: {dossier: dossier}
+    end
   end
 end
