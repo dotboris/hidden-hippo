@@ -5,7 +5,7 @@ module HiddenHippo
     class Packet
       def self.fields
         unless @fields
-          super_fields = self == Packet ? [] : superclass.fields
+          super_fields = self == Packet ? [] : superclass.fields.dup
           @fields = super_fields
         end
         @fields

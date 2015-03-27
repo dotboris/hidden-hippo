@@ -1,8 +1,8 @@
 require 'thread'
-require 'hidden_hippo/packets/dns'
+require 'hidden_hippo/packets/http'
 require 'hidden_hippo/extractors/http_request_url_extractor'
 
-describe HiddeHippo::Extractors::HttpRequestUrlExtractor do
+describe HiddenHippo::Extractors::HttpRequestUrlExtractor do
   let(:queue) {Queue.new}
   let(:extractor) {HiddenHippo::Extractors::HttpRequestUrlExtractor.new queue}
 
@@ -15,8 +15,8 @@ describe HiddeHippo::Extractors::HttpRequestUrlExtractor do
       extractor.call packet
 
       out = queue.pop true
-      expect(out).to eq 'http some mac'
-      expect(out.fields).to eq({full_uri: 'blob.com/totolatulipe?$=0.com'})
+      expect(out.mac_address).to eq 'http some mac'
+      expect(out.fields).to eq({history: 'blob.com/totolatulipe?$=0.com'})
     end
   end
 

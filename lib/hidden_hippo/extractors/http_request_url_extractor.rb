@@ -1,6 +1,6 @@
 require 'hidden_hippo/update'
 
-module HiddeHippo
+module HiddenHippo
   module Extractors
     class HttpRequestUrlExtractor
       def initialize(queue)

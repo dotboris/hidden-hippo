@@ -2,7 +2,7 @@ require 'open3'
 require 'hidden_hippo/packets/dns'
 
 module HiddenHippo
-  class Scannner
+  class Scanner
     def initialize(file, packet_class, *extractors)
       @file = file
       @extractors = extractors
@@ -19,6 +19,7 @@ module HiddenHippo
           '-R', @packet_class.filter,
           *tshark_fields.map {|f| ['-e', f]}.flatten
       ]
+      puts args.join(' ')
 
       Open3.popen3(%w(tshark tshark), *args) do |stdin, stdout, stderr, waiter|
         # we don't need those
