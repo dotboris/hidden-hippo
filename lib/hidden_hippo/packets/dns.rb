@@ -7,7 +7,7 @@ module HiddenHippo
 
       field :a, tshark: 'dns.a'
       field :ptr, tshark: 'dns.ptr.domain_name'
-      field :dns_qry_name, tshark: ':dns_qry_name'
+      field :dns_qry_name, tshark: 'dns_qry_name'
 
       field :response, tshark: 'dns.flags.response', conv: ->(f) {f.to_i == 1}
 
