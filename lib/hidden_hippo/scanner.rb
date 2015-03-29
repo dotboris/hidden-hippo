@@ -1,8 +1,7 @@
 require 'open3'
-require 'hidden_hippo/packets/dns'
 
 module HiddenHippo
-  class Scannner
+  class Scanner
     def initialize(file, packet_class, *extractors)
       @file = file
       @extractors = extractors

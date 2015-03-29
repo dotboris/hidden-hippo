@@ -1,12 +1,12 @@
-require 'hidden_hippo/scannner'
+require 'hidden_hippo/scanner'
 require 'hidden_hippo/packets/dns'
 
-describe 'HiddenHippo::Scannner(Dns)' do
+describe 'HiddenHippo::Scanner(Dns)' do
 
   describe '#call' do
     it 'should parse the pcap file' do
       extractor = double('extractor')
-      scanner = HiddenHippo::Scannner.new('spec/fixtures/dns_elise.pcap', HiddenHippo::Packets::Dns, extractor)
+      scanner = HiddenHippo::Scanner.new('spec/fixtures/dns_elise.pcap', HiddenHippo::Packets::Dns, extractor)
 
       expect(extractor).to receive(:call) do |packet|
         expect(packet.ptr).to eq 'Elises-MacBook-Pro.local'
@@ -19,7 +19,7 @@ describe 'HiddenHippo::Scannner(Dns)' do
 
     it 'should skip non dns lines' do
       extractor = double('extractor')
-      scanner = HiddenHippo::Scannner.new 'spec/fixtures/tcp_noise.pcap', HiddenHippo::Packets::Dns, extractor
+      scanner = HiddenHippo::Scanner.new 'spec/fixtures/tcp_noise.pcap', HiddenHippo::Packets::Dns, extractor
 
       expect(extractor).not_to receive(:call)
 
@@ -28,7 +28,7 @@ describe 'HiddenHippo::Scannner(Dns)' do
 
     it 'should find the mac addresses in eth traffic' do
       extractor = double('extractor')
-      scanner = HiddenHippo::Scannner.new('spec/fixtures/dns_reddit_eth.pcap', HiddenHippo::Packets::Dns, extractor)
+      scanner = HiddenHippo::Scanner.new('spec/fixtures/dns_reddit_eth.pcap', HiddenHippo::Packets::Dns, extractor)
 
       expect(extractor).to receive(:call).at_least(:once) do |packet|
         expect(packet.mac_src).not_to be_nil

@@ -1,0 +1,10 @@
+<h3><%= name %></h3>
+<% if possibilities.any? %>
+    <ul>
+    <% possibilities.each do |possibility| %>
+    <li><%= possibility %></li>
+    <% end %>
+    </ul>
+<% else %>
+    <p>Nothing here :(</p>
+<% end %>

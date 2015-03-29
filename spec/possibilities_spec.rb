@@ -46,6 +46,13 @@ describe HiddenHippo::Possibilities do
       expect(possibilities['dat.thing']).to eq 0
       expect(possibilities['dat_thing']).to eq 1
     end
+
+    it 'should replace dollar signs with underscores' do
+      possibilities << 'dat$thing'
+
+      expect(possibilities['dat$thing']).to eq 0
+      expect(possibilities['dat_thing']).to eq 1
+    end
   end
 
   describe '#[]' do
