@@ -15,9 +15,13 @@ module HiddenHippo
     field :hostname, type: Possibilities, default: ->{ Possibilities.new }
     field :username, type: Possibilities, default: ->{ Possibilities.new }
     field :email, type: Possibilities, default: ->{ Possibilities.new }
-    field :device, type: Possibilities, default: ->{ Possibilities.new }
     field :gender, type: Possibilities, default: ->{ Possibilities.new }
     field :age, type: Possibilities, default: ->{ Possibilities.new }
     field :history, type: Possibilities, default: ->{ Possibilities.new }
+    field :device_name, type: Possibilities, default: ->{ Possibilities.new }
+    field :device_model_number, type: Possibilities, default: ->{ Possibilities.new }
+    field :device_model_name, type: Possibilities, default: ->{ Possibilities.new }
+    field :device_manufacturer, type: Possibilities, default: ->{ Possibilities.new }
+    field :device_oui, type: Possibilities, default: ->{ Possibilities.new }
   end
 end

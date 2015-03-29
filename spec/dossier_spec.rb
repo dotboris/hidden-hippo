@@ -69,4 +69,21 @@ describe HiddenHippo::Dossier, :db do
 
     expect(HiddenHippo::Dossier.find('find me').name['thing']).to eq 1
   end
+
+  it 'should format the model name in a single string' do
+    dossier = HiddenHippo::Dossier.new mac_address: 'aa:bb:cc:dd:ee:ff:aa'
+
+    dossier.device_name << 'device_name'
+    dossier.device_model_number << 'device_model_number'
+    dossier.device_model_name << 'device_model_name'
+    dossier.device_manufacturer << 'device_manufacturer'
+    dossier.device_oui << 'device_oui'
+    dossier.save!
+
+    expect(dossier.device_name).to contain_exactly 'device_name'
+    expect(dossier.device_model_number).to contain_exactly 'device_model_number'
+    expect(dossier.device_model_name).to contain_exactly 'device_model_name'
+    expect(dossier.device_manufacturer).to contain_exactly 'device_manufacturer'
+    expect(dossier.device_oui).to contain_exactly 'device_oui'
+  end
 end
