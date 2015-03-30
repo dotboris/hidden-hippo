@@ -70,7 +70,7 @@ describe HiddenHippo::Dossier, :db do
     expect(HiddenHippo::Dossier.find('find me').name['thing']).to eq 1
   end
 
-  it 'save device related informations' do
+  it 'should format the model name in a single string' do
     dossier = HiddenHippo::Dossier.new mac_address: 'aa:bb:cc:dd:ee:ff:aa'
 
     dossier.device_name << 'device_name'
