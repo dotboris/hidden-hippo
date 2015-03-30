@@ -12,11 +12,11 @@ module HiddenHippo
         return if packet.dns_qry_name.delete(" ") == ""
 
         if packet.request?
-          #@queue << Update.new(packet.mac_src, {history: packet.dns_qry_name})
+          @queue << Update.new(packet.mac_src, {history: packet.dns_qry_name})
         end
 
         if packet.response?
-         # @queue << Update.new(packet.mac_dest, {history: packet.dns_qry_name})
+          @queue << Update.new(packet.mac_dest, {history: packet.dns_qry_name})
         end
 
        end
