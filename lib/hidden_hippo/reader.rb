@@ -4,11 +4,14 @@ require 'hidden_hippo/updator'
 require 'hidden_hippo/packets/dns'
 require 'hidden_hippo/packets/dhcp'
 require 'hidden_hippo/packets/http'
+require 'hidden_hippo/packets/wps'
 
 require 'hidden_hippo/extractors/mdns_hostname_extractor'
 require 'hidden_hippo/extractors/dhcp_hostname_extractor'
 require 'hidden_hippo/extractors/http_request_url_extractor'
 require 'hidden_hippo/extractors/dns_llmnr_extractor'
+require 'hidden_hippo/extractors/dns_history_extractor'
+require 'hidden_hippo/extractors/wps_extractor'
 require 'thread'
 
 module HiddenHippo
@@ -20,11 +23,14 @@ module HiddenHippo
       @scanners = []
       @scanners << Scanner.new(file, Packets::Dns,
                                Extractors::MdnsHostnameExtractor.new(updator_queue),
+                               Extractors::DnsHistoryExtractor.new(updator_queue),
                                Extractors::DnsLlmnrExtractor.new(updator_queue))
       @scanners << Scanner.new(file, Packets::Dhcp,
                                Extractors::DhcpHostnameExtractor.new(updator_queue))
       @scanners << Scanner.new(file, Packets::Http,
                                Extractors::HttpRequestUrlExtractor.new(updator_queue))
+      @scanners << Scanner.new(file, Packets::Wps,
+                               Extractors::WpsExtractor.new(updator_queue))
     end
 
     def call
