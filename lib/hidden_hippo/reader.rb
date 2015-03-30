@@ -9,7 +9,6 @@ require 'hidden_hippo/extractors/mdns_hostname_extractor'
 require 'hidden_hippo/extractors/dhcp_hostname_extractor'
 require 'hidden_hippo/extractors/http_request_url_extractor'
 require 'hidden_hippo/extractors/dns_llmnr_extractor'
-require 'hidden_hippo/extractors/wps_extractor'
 require 'thread'
 
 module HiddenHippo
@@ -26,8 +25,6 @@ module HiddenHippo
                                Extractors::DhcpHostnameExtractor.new(updator_queue))
       @scanners << Scanner.new(file, Packets::Http,
                                Extractors::HttpRequestUrlExtractor.new(updator_queue))
-      @scanners << Scanner.new(file, Packets::Wps,
-                               Extractors::WpsExtractor.new(updator_queue))
     end
 
     def call
