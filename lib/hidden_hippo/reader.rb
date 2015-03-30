@@ -4,6 +4,7 @@ require 'hidden_hippo/updator'
 require 'hidden_hippo/packets/dns'
 require 'hidden_hippo/packets/dhcp'
 require 'hidden_hippo/packets/http'
+require 'hidden_hippo/packets/wps'
 
 require 'hidden_hippo/extractors/mdns_hostname_extractor'
 require 'hidden_hippo/extractors/dhcp_hostname_extractor'

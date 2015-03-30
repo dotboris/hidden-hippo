@@ -10,24 +10,24 @@ module HiddenHippo
       def call(packet)
         update = Update.new(packet.mac_src, {})
 
-        if packet.device_name.delete(" ") != ""
-          update.fields[:device_name] = packet.device_name
+        if packet.ddevice_name.delete(" ") != ""
+          update.fields[:ddevice_name] = packet.ddevice_name
         end
 
-        if packet.device_name.delete(" ") != ""
-          update.fields[:device_model_number] = packet.device_model_number
+        if packet.ddevice_name.delete(" ") != ""
+          update.fields[:ddevice_model_number] = packet.ddevice_model_number
         end
 
-        if packet.device_name.delete(" ") != ""
-          update.fields[:device_model_name] = packet.device_model_name
+        if packet.ddevice_name.delete(" ") != ""
+          update.fields[:ddevice_model_name] = packet.ddevice_model_name
         end
 
-        if packet.device_name.delete(" ") != ""
-          update.fields[:device_manufacturer] = packet.device_manufacturer
+        if packet.ddevice_name.delete(" ") != ""
+          update.fields[:ddevice_manufacturer] = packet.ddevice_manufacturer
         end
 
-        if packet.device_name.delete(" ") != ""
-          update.fields[:device_oui] = packet.device_oui
+        if packet.ddevice_name.delete(" ") != ""
+          update.fields[:ddevice_oui] = packet.ddevice_oui
         end
 
         @queue << update
