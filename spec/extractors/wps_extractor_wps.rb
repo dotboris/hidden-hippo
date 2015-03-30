@@ -21,13 +21,11 @@ describe HiddenHippo::Extractors::WpsExtractor do
       out = queue.pop true
       expect(out).not_to be_nil
       expect(out.mac_address).to eq 'some mac'
-      expect(out.fields).to eq({
-        device_name: 'device_name',
-        device_manufacturer: 'manufacturer',
-        device_model_name: 'model_name',
-        device_model_number: 'model_number',
-        device_oui: 'oui'
-      })
+      expect(out.fields).to eq({device_name: 'device_name'})
+      expect(out.fields).to eq({device_manufacturer: 'manufacturer'})
+      expect(out.fields).to eq({device_model_nam: 'model_name'})
+      expect(out.fields).to eq({device_model_number: 'model_number'})
+      expect(out.fields).to eq({device_oui: 'oui'})
     end
   end
 end
