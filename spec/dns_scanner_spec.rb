@@ -37,16 +37,5 @@ describe 'HiddenHippo::Scanner(Dns)' do
 
       scanner.call
     end
-
-    it 'should ignore empty lines' do
-      extractor = double('extractor')
-      scanner = HiddenHippo::Scanner.new 'spec/fixtures/dns_elise.pcap', HiddenHippo::Packets::Dns, extractor
-
-      expect(extractor).to receive(:call) do |packet|
-        expect(packet.a).to be_nil
-      end
-
-      scanner.call
-    end
   end
 end
