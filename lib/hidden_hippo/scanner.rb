@@ -30,7 +30,9 @@ module HiddenHippo
             next
           end
 
-          split_line = line.chomp.split("\t").map {|f| f.empty? ? nil : f}
+          split_line = line.chomp.split("\t")
+                       .map(&:rstrip).map(&:lstrip)
+                       .map {|f| f.empty? ? nil : f}
 
           assoc = tshark_fields.zip split_line
           packet = @packet_class.parse Hash[*assoc.flatten]
