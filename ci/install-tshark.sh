@@ -1,6 +1,6 @@
 #!/bin/bash
 
-wget https://2.na.dl.wireshark.org/src/wireshark-1.10.13.tar.bz2
+wget --no-check-certificate https://2.na.dl.wireshark.org/src/wireshark-1.10.13.tar.bz2
 tar xjf wireshark-1.10.13.tar.bz2
 cd wireshark-1.10.13
 
